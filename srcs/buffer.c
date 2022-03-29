@@ -6,7 +6,7 @@
 /*   By: nlecouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:57:09 by nlecouri          #+#    #+#             */
-/*   Updated: 2022/03/28 12:22:44 by nlecouri         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:50:42 by nlecouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -16,41 +16,45 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-char	*ft_buffer(char *file, char *buffer, int i)
+int	ft_strlen (char *buffer)
 {
-	int	fd;
-	int	ret;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	read(fd, buffer, i);
-	buffer[i] = '\0';
-	close(fd);
-	return (buffer);
+	int	i;
+	
+	i = 0;
+	while (buffer[i])
+		i++;
+	return (i);
 }
 
-char	*convert_file(char *file)
+int	ft_buffer(char *file)
 {
 	int		fd;
-	char	buf;
-	int		i;
 	char	*buffer;
+	char	buf;
+	int		ret;
 
-	i = 0;
-	fd = open(file, O_RDONLY);
+	buffer = (char*)malloc(sizeof(char) * 4096);
+	if (buffer == NULL)
+		return (-1);
+	fd = open("stdin_map.dict", O_WRONLY | O_CREAT | O_APPEND);
 	if (fd == -1)
-		return (NULL);
-	while (read(fd, &buf, 1) > 0)
-		i++;
-	buffer = (char *)malloc(sizeof(char) * i + 1);
-	if (!buffer)
-		return (NULL);
-	close(fd);
-	return (ft_buffer(file, buffer, i));
+		return (-1);
+	ret = open(file, O_RDONLY);
+	while (read(ret, &buf, 1) > 0)
+	{
+		buffer[ret] = 
+		write(fd, buffer, ft_strlen(buffer));
+	}
+	if (close(fd) == -1)
+		return (-1);
+	if (buffer == NULL)
+		return (-1);
+	free(buffer);
+	return (1);
 }
 
-/*int main(void)
+
+int main(void)
 {
-    printf("%s", convert_file("numbers.dict"));
-}*/
+    printf("%d", ft_buffer("map.dict"));
+}

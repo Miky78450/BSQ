@@ -12,7 +12,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "map.h"
+#include "main.h"
 
 int	ft_str_len(char *buffer)
 {
@@ -113,7 +113,7 @@ int	verif_map(char *buffer)
 	return (1);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char	*buffer = "9.ox\n...........................\n....o......................\n............o..............\n...........................\n....o......................\n...............o...........\n...........................\n......o..............o.....\n..o.......o................";
 	if (verif_map(buffer) == 0)
@@ -121,4 +121,4 @@ int	main(void)
 	else
 		write (1, "la map est bonne\n", 18);
 	return (0);
-}
+}*/

@@ -6,16 +6,20 @@
 /*   By: nlecouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 11:51:59 by nlecouri          #+#    #+#             */
-/*   Updated: 2022/03/29 11:57:27 by nlecouri         ###   ########.fr       */
+/*   Updated: 2022/03/29 12:43:48 by nlecouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MAP_h
 # define MAP_H
 
-int	ft_ligne(char *buffer);
-int	carr_ligne(char *buffer, int i);
-int	db_carr(char *buffer, int i);
-int	nb_ligne(char *buffer, int nbrs_ligne);
+typedef	struct s_map t;
+struct s_map
+{
+	char	empty;
+	char	obstacle;
+	char	full;
+	int		map_size;
+	int		map_len;
+};
 
-typedef	struct
 #endif
