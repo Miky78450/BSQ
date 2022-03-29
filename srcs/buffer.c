@@ -30,19 +30,17 @@ int	ft_buffer(char *file)
 {
 	int		fd;
 	char	*buffer;
-	char	buf;
 	int		ret;
 
 	buffer = (char*)malloc(sizeof(char) * 4096);
 	if (buffer == NULL)
 		return (-1);
-	fd = open("stdin_map.dict", O_WRONLY | O_CREAT | O_APPEND);
+	fd = open("stdin_map", O_WRONLY | O_CREAT | O_APPEND);
 	if (fd == -1)
 		return (-1);
 	ret = open(file, O_RDONLY);
-	while (read(ret, &buf, 1) > 0)
-	{
-		buffer[ret] = 
+	while (read(ret, buffer, 1) > 0)
+	{ 
 		write(fd, buffer, ft_strlen(buffer));
 	}
 	if (close(fd) == -1)
