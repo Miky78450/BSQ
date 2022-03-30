@@ -6,7 +6,7 @@
 /*   By: nlecouri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 11:57:09 by nlecouri          #+#    #+#             */
-/*   Updated: 2022/03/29 18:50:42 by nlecouri         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:27:02 by nlecouri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -28,23 +28,20 @@ int	ft_strlen (char *buffer)
 
 int	ft_buffer(char *file)
 {
-	int		fd;
 	char	*buffer;
+	char	buf;
 	int		ret;
 
 	buffer = (char*)malloc(sizeof(char) * 4096);
 	if (buffer == NULL)
 		return (-1);
-	fd = open("stdin_map", O_WRONLY | O_CREAT | O_APPEND);
-	if (fd == -1)
-		return (-1);
 	ret = open(file, O_RDONLY);
-	while (read(ret, buffer, 1) > 0)
-	{ 
-		write(fd, buffer, ft_strlen(buffer));
+	while (read(ret, &buf, 1) > 0)
+	{
+		buffer = &buf;
+		buffer[ret] = '\0';
+
 	}
-	if (close(fd) == -1)
-		return (-1);
 	if (buffer == NULL)
 		return (-1);
 	free(buffer);

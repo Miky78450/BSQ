@@ -27,8 +27,9 @@ t_map	struct_map_len(char *buffer, t_map my_map)
         	l_size += 1;
         	j++;
 	}
-	my_map.map_len = l_size;
+	my_map.len = l_size;
 	return (my_map);
+	
 }
 
 t_map	struct_nb_ligne(char *buffer, t_map my_map)
@@ -44,11 +45,11 @@ t_map	struct_nb_ligne(char *buffer, t_map my_map)
 			nb_ligne++;
 		j++;
 	}
-	my_map.map_size = nb_ligne;
+	my_map.size = nb_ligne;
 	return (my_map);
 }
 
-t_map	struct_carr_ligne_full(char *buffer, t_map my_map)
+t_map	struct_carr_ligne(char *buffer, t_map my_map)
 {
 	int	j;
 	
@@ -56,28 +57,17 @@ t_map	struct_carr_ligne_full(char *buffer, t_map my_map)
 	while (buffer[j] != '\n')
 		j++;
 	my_map.full = buffer[j - 1];
-	return (my_map);
-}
-
-t_map	struct_carr_ligne_empty(char *buffer, t_map my_map)
-{
-	int	j;
-	
-	j = 0;
-	while (buffer[j] != '\n')
-		j++;
+	my_map.obstacle = buffer[j - 2];
 	my_map.empty = buffer[j - 3];
 	return (my_map);
 }
 
-t_map	struct_carr_ligne_obstacle(char *buffer, t_map my_map)
+t_map	get_map(char *buffer)
 {
-	int	j;
+	t_map	my_map;
 	
-	j = 0;
-	while (buffer[j] != '\n')
-		j++;
-	my_map.obstacle = buffer[j - 2];
+	my_map = struct_map_len(buffer, my_map);
+	my_map = struct_nb_ligne(buffer, my_map);
+	my_map = struct_carr_ligne(buffer, my_map);
 	return (my_map);
 }
-
